@@ -133,7 +133,7 @@ export function exportProjectStories(projectId: string): LinearStory[] {
     acceptanceCriteria: parseAcceptanceCriteria(issue.description || issue.title),
     linearIssueId: issue.id,
     linearIdentifier: issue.identifier,
-    teamId: issue.team.id,
+    teamId: issue.team?.id ?? "",
   }));
 }
 
@@ -150,7 +150,7 @@ export function exportIssueStory(issueId: string): LinearStory[] {
     acceptanceCriteria: parseAcceptanceCriteria(issue.description || issue.title),
     linearIssueId: issue.id,
     linearIdentifier: issue.identifier,
-    teamId: issue.team.id,
+    teamId: issue.team?.id ?? "",
   }];
 }
 
@@ -168,7 +168,7 @@ export function exportIssueStories(issueIds: string[]): LinearStory[] {
       acceptanceCriteria: parseAcceptanceCriteria(issue.description || issue.title),
       linearIssueId: issue.id,
       linearIdentifier: issue.identifier,
-      teamId: issue.team.id,
+      teamId: issue.team?.id ?? "",
     };
   });
 }
