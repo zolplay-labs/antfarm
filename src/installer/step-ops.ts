@@ -503,6 +503,7 @@ export function claimStep(agentId: string): ClaimResult {
          WHERE prev.run_id = s.run_id
            AND prev.step_index < s.step_index
            AND prev.status NOT IN ('done', 'skipped')
+           AND NOT (prev.type = 'loop' AND prev.status = 'running')
        )
     ORDER BY s.step_index ASC, s.step_id ASC
      LIMIT 1`
