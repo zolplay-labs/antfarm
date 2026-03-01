@@ -91,6 +91,12 @@ export async function runWorkflow(params: RunWorkflowParams): Promise<{ id: stri
     initialContext["linear_mapping"] = JSON.stringify(linearMapping);
     initialContext["linear_source"] = params.storiesFrom;
 
+    // Auto-generate branch name when planner is skipped (stories imported directly)
+    if (!initialContext["branch"]) {
+      const slug = params.taskTitle.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60);
+      initialContext["branch"] = `feat/${slug}`;
+    }
+
     logger.info(`Imported ${linearStories.length} stories from Linear (${params.storiesFrom})`, { workflowId: workflow.id });
   }
 
